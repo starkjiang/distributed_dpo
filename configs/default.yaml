@@ -1,0 +1,33 @@
+# configs/default.yaml
+# =====================
+# Default hyperparameters for Distributed DPO experiments.
+# Override individual fields via CLI flags or by passing a custom YAML.
+
+model:
+  name: "distilgpt2"      # HuggingFace model ID
+  max_length: 64                  # maximum token length per sequence
+
+training:
+  beta: 0.2                       # DPO KL-penalty coefficient
+  lr_adam: 1.0e-4                 # AdamW learning rate (FedDPO / Centralized / DecDPO)
+  lr_sgd: 3.0e-5                  # SGD learning rate  (DecDPO — fixed η)
+  grad_clip: 1.0                  # max gradient norm
+  batch_size: 4                   # preference pairs per mini-batch
+
+federation:
+  num_agents: 5                   # total number of agents / clients
+  comm_rounds: 80                 # global communication rounds
+  local_steps: 3                  # local update steps per round (FedDPO)
+  dec_local_steps: 5              # local update steps per round (DecDPO)
+  participation: 3                # default partial-participation count S
+  n_samples_agent: 120            # preference pairs allocated to each agent
+
+data:
+  datasets:
+    - "hh-rlhf"                   # Anthropic/hh-rlhf
+    - "SHP"                       # stanfordnlp/SHP
+
+output:
+  dir: "./ddpo_results"           # root output directory
+  seed: 42                        # global random seed
+  multi_seed: [42, 43, 44]        # multiple seeds
