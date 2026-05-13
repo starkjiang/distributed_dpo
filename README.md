@@ -3,7 +3,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-ee4c2c.svg)](https://pytorch.org/)
 [![HuggingFace](https://img.shields.io/badge/🤗-Transformers-yellow.svg)](https://huggingface.co/docs/transformers)
-<!-- [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) -->
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 Empirical validation experiments for **FedDPO** and **DecDPO** from the paper  
 *"Distributed Direct Preference Optimisation"*.
@@ -39,7 +39,7 @@ Direct Preference Optimisation (DPO) fine-tunes language models from human prefe
 | **FedDPO** | Federated averaging (FedAvg) with optional partial participation and gradient staleness |
 | **DecDPO** | Fully decentralised gossip mixing over arbitrary communication graph topologies |
 
-All experiments run on `distilgpt` (≈82 M parameters) for fast iteration. The framework is model-agnostic and straightforward to adapt to larger LLMs.
+All experiments run on `distilgpt2` (≈82 M parameters) for fast iteration. The framework is model-agnostic and straightforward to adapt to larger LLMs.
 
 ---
 
