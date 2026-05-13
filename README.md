@@ -3,7 +3,7 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-ee4c2c.svg)](https://pytorch.org/)
 [![HuggingFace](https://img.shields.io/badge/🤗-Transformers-yellow.svg)](https://huggingface.co/docs/transformers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+<!-- [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE) -->
 
 Empirical validation experiments for **FedDPO** and **DecDPO** from the paper  
 *"Distributed Direct Preference Optimisation"*.
@@ -39,17 +39,17 @@ Direct Preference Optimisation (DPO) fine-tunes language models from human prefe
 | **FedDPO** | Federated averaging (FedAvg) with optional partial participation and gradient staleness |
 | **DecDPO** | Fully decentralised gossip mixing over arbitrary communication graph topologies |
 
-All experiments run on `distilroberta-base` (≈82 M parameters) for fast iteration. The framework is model-agnostic and straightforward to adapt to larger LLMs.
+All experiments run on `distilgpt` (≈82 M parameters) for fast iteration. The framework is model-agnostic and straightforward to adapt to larger LLMs.
 
 ---
 
 ## Key Results
 
 - **FedDPO (full participation)** matches centralized DPO convergence.
-- **FedDPO (partial)** incurs a small variance floor that scales as `ζ²g / S`.
-- **DecDPO** convergence depends on the *spectral gap* `1 − ρ²` of the mixing matrix:  
-  the consensus error satisfies `e_θ ∝ η² / (1 − ρ²)` (Theorem 6.1).
-- **Gradient staleness** increases the stationary gap roughly linearly in `q_max`.
+- **FedDPO (partial)** incurs a small variance floor that scales as `$\zeta^2_g/S`.
+- **DecDPO** convergence depends on the *spectral gap* `$1-\rho^2` of the mixing matrix:  
+  the consensus error satisfies `$\mathfrak{e}_\theta ∝ \eta^2 / (1 − \rho^2)` (Theorem 6.1).
+- **Gradient staleness** increases the stationary gap roughly linearly in `q_{max}`.
 
 ---
 
@@ -82,7 +82,7 @@ distributed-dpo/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/distributed-dpo.git
+git clone https://github.com/starkjiang/distributed-dpo.git
 cd distributed-dpo
 ```
 
@@ -155,12 +155,12 @@ Key parameters:
 |-----------|---------|-------------|
 | `model_name` | `distilroberta-base` | HuggingFace model ID |
 | `num_agents` | `5` | Number of distributed agents |
-| `comm_rounds` | `40` | Global communication rounds |
+| `comm_rounds` | `80` | Global communication rounds |
 | `local_steps` | `3` | Local update steps per round (FedDPO) |
 | `dec_local_steps` | `5` | Local update steps per round (DecDPO) |
-| `beta` | `0.1` | DPO KL-penalty coefficient |
-| `lr_adam` | `1e-5` | AdamW learning rate (FedDPO / Centralized) |
-| `lr_sgd` | `3e-5` | SGD learning rate (DecDPO — fixed η) |
+| `beta` | `0.2` | DPO KL-penalty coefficient |
+| `lr_adam` | `1e-4` | AdamW learning rate (FedDPO / Centralized) |
+| `lr_sgd` | `3e-5` | SGD learning rate (fixed η) if using SGD |
 | `participation` | `3` | Clients sampled per round (partial FedDPO) |
 | `n_samples_agent` | `120` | Preference pairs per agent |
 | `batch_size` | `4` | Mini-batch size |
@@ -194,7 +194,7 @@ Runs all four algorithms on the same data partition and plots gradient-norm and 
 
 #### Graph topologies (B3)
 
-| Topology | Spectral gap `1−ρ²` | Expected consensus error |
+| Topology | Spectral gap `$1−\rho^2$` | Expected consensus error |
 |----------|---------------------|--------------------------|
 | Path | lowest | highest |
 | Ring | low | high |
@@ -202,7 +202,7 @@ Runs all four algorithms on the same data partition and plots gradient-norm and 
 | Complete | highest | lowest |
 
 The code empirically validates Theorem 6.1:  
-**`e_θ ∝ η² / (1 − ρ²)`**
+**`$\mathfrak{e}_\theta ∝ \eta^2 / (1 − \rho^2)$`**
 
 ---
 
