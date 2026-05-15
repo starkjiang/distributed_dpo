@@ -4,6 +4,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-ee4c2c.svg)](https://pytorch.org/)
 [![HuggingFace](https://img.shields.io/badge/🤗-Transformers-yellow.svg)](https://huggingface.co/docs/transformers)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Project Page](https://img.shields.io/badge/Project-Page-red.svg)](https://starkjiang.github.io/ddpo-project/)
 
 Empirical validation experiments for **FedDPO** and **DecDPO** from the paper  
 *"Distributed Direct Preference Optimisation"*.
